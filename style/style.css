@@ -1,0 +1,17 @@
+.container{
+    height: 100vh;
+}
+.encrypt-div, .decrypt-div{
+    border: 2px solid #c38fff;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.home-page-btn{
+    border: 2px solid #c38fff;
+    color: #fefefe;
+}
+
+.home-page-btn:hover{
+    color: #c38fff
+}
