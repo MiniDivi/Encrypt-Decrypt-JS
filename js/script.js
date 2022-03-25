@@ -20,14 +20,18 @@ $(document).ready(function () {
 
         for (let i = 0; i < wordToEncryptLenght; i++) {
             for (let j = 0; j < alphabet.length; j++) {
-                if (alphabet[j] === wordToEncrypt.charAt(i)) {
-                    if (keyValuesCounter == keyValuesArray.length) {
-                        keyValuesCounter = 0;
-                    }
-                    encryptedWord += getLetter((+j + +keyValuesArray[keyValuesCounter]) % alphabet.length);
-                    keyValuesCounter++;
+                if (wordToEncrypt.charAt(i) !== ' ') {
+                    if (alphabet[j] === wordToEncrypt.charAt(i)) {
+                        if (keyValuesCounter == keyValuesArray.length) {
+                            keyValuesCounter = 0;
+                        }
+                        encryptedWord += getLetter((+j + +keyValuesArray[keyValuesCounter]) % alphabet.length);
+                        keyValuesCounter++;
 
-                    break;
+                        break;
+                    }
+                } else {
+                    encryptedWord += " ";
                 }
             }
         }
@@ -53,15 +57,20 @@ $(document).ready(function () {
 
         for (let i = 0; i < wordToDecryptLenght; i++) {
             for (let j = 0; j < alphabet.length; j++) {
-                if (alphabet[j] === wordToDecrypt.charAt(i)) {
-                    if (keyValuesCounter == keyValuesArrayDecrypt.length) {
-                        keyValuesCounter = 0;
-                    }
-                    
-                    decryptedWord += (getLetter((alphabet.length + (+j - +keyValuesArrayDecrypt[keyValuesCounter])) % alphabet.length));
-                    keyValuesCounter++;
+                if(wordToDecrypt.charAt(i) !== ' '){
 
-                    break;
+                    if (alphabet[j] === wordToDecrypt.charAt(i)) {
+                        if (keyValuesCounter == keyValuesArrayDecrypt.length) {
+                            keyValuesCounter = 0;
+                        }
+                        
+                        decryptedWord += (getLetter((alphabet.length + (+j - +keyValuesArrayDecrypt[keyValuesCounter])) % alphabet.length));
+                        keyValuesCounter++;
+                        
+                        break;
+                    }
+                }else {
+                    decryptedWord += " ";
                 }
             }
         }
@@ -75,7 +84,6 @@ function generateAlphabeth() {
 }
 
 function getLetter(number) {
-    console.log("alphabet: " + alphabet[number]);
     return alphabet[number];
 }
 
@@ -101,7 +109,7 @@ function showKeyValueInput(EncryptOrDecypt) { //*Encrypt = true; Decrypt = false
             code += '<label for="C' + i + '" class="me-3 ms-2">C' + i + ': </label>';
             code += '<input type="number" class="mb-3" name="C' + i + '" id="C' + i + '" min="1" max="25" required> ';
         }
-        $('keyValuesEncrypt').html(code); 
+        $('keyValuesEncrypt').html(code);
     } else {
         for (let i = 0; i < numberOfKeys; i++) {
             code += '<label for="D' + i + '" class="me-3 ms-2">C' + i + ': </label>';
